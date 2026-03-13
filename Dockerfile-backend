@@ -1,0 +1,11 @@
+FROM python:3.12-slim
+
+WORKDIR /app
+ADD backend/requirements.txt .
+RUN pip install -r requirements.txt
+ADD backend/app.py .
+ADD backend/business.py .
+ADD backend/names.txt .
+
+ENTRYPOINT ["python"]
+CMD ["app.py"]

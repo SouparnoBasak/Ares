@@ -1,0 +1,30 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile-backend
+    hostname: backend
+    ports:
+      - "8000:8000"
+    networks:
+      - ares-network
+  
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile-frontend
+    hostname: frontend
+    environment:
+      - BACKEND_URL=http://backend:8000/api
+    ports:
+      - "3000:3000"
+    links:
+      - backend
+    depends_on:
+      - backend
+    networks:
+      - ares-network
+  
+networks:
+  ares-network:     
+  
